@@ -1,0 +1,78 @@
+# Altneb Backend — Java 21 / Spring Boot / Gradle
+
+# Codex 및 내부 설계 문서 (저장소 전체에서 제외)
+AGENTS.md
+ARCHITECTURE.md
+IMPLEMENTATION_PLAN.md
+
+# Gradle 빌드 산출물 및 캐시
+.gradle/
+**/build/
+
+# Java 컴파일 결과
+*.class
+out/
+target/
+
+# IDE 설정
+.idea/
+*.iml
+*.ipr
+*.iws
+.classpath
+.project
+.settings/
+.vscode/
+
+# OS 및 편집기 임시 파일
+.DS_Store
+Thumbs.db
+Desktop.ini
+*~
+*.swp
+*.swo
+*.tmp
+*.temp
+*.bak
+
+# 환경 변수 및 인증 정보
+.env
+.env.*
+!.env.example
+!.env.*.example
+*.pem
+*.key
+*.p12
+*.pfx
+*.jks
+*.keystore
+secrets/
+credentials/
+
+# 로컬 전용 애플리케이션 설정
+application-local.yml
+application-local.yaml
+application-local.properties
+application-secret.yml
+application-secret.yaml
+application-secret.properties
+
+# 로그 및 런타임 산출물
+*.log
+logs/
+*.pid
+*.pid.lock
+*.hprof
+
+# 테스트 산출물 (테스트 소스는 포함)
+coverage/
+**/test-results/
+**/reports/
+*.exec
+
+# 로컬 데이터베이스 및 덤프
+*.db
+*.sqlite
+*.sqlite3
+*.dump
+*.sql.gz
