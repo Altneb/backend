@@ -1,0 +1,10 @@
+dependencies {
+    api project(':platform:error')
+    implementation project(':platform:observability')
+
+    implementation 'org.springframework:spring-webmvc'
+    implementation 'org.springframework.boot:spring-boot-autoconfigure'
+    implementation 'jakarta.validation:jakarta.validation-api'
+    implementation 'org.springdoc:springdoc-openapi-starter-common:3.1.0'
+    compileOnly 'jakarta.servlet:jakarta.servlet-api'
+}
