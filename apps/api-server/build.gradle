@@ -1,0 +1,36 @@
+plugins {
+    id 'org.springframework.boot'
+}
+
+dependencies {
+    implementation project(':modules:identity')
+    implementation project(':modules:account')
+    implementation project(':modules:order')
+    implementation project(':modules:execution')
+    implementation project(':modules:portfolio')
+    implementation project(':modules:ledger')
+    implementation project(':modules:market')
+    implementation project(':modules:outbox')
+
+    implementation project(':platform:error')
+    implementation project(':platform:web')
+    implementation project(':platform:security')
+    implementation project(':platform:persistence')
+    implementation project(':platform:messaging')
+    implementation project(':platform:observability')
+
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    runtimeOnly 'org.springframework.modulith:spring-modulith-runtime'
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.springframework.modulith:spring-modulith-starter-test'
+    testImplementation 'com.tngtech.archunit:archunit-junit5:1.5.1'
+}
+
+tasks.named('jar') {
+    enabled = false
+}
+
+tasks.named('bootJar') {
+    archiveFileName = 'altneb-api-server.jar'
+}

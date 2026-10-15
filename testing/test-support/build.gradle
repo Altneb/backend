@@ -1,0 +1,5 @@
+plugins {
+    id 'java-test-fixtures'
+}
+
+description = 'Reusable test fixtures and infrastructure for Altneb modules.'

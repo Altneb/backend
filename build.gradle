@@ -1,0 +1,72 @@
+plugins {
+    id 'base'
+    id 'org.springframework.boot' version '4.1.1' apply false
+    id 'io.spring.dependency-management' version '1.1.7' apply false
+}
+
+group = 'com.altneb'
+version = '0.0.1-SNAPSHOT'
+
+ext {
+    springBootVersion = '4.1.1'
+    springModulithVersion = '2.1.1'
+}
+
+configure(subprojects.findAll { it.childProjects.isEmpty() }) {
+    apply plugin: 'java-library'
+    apply plugin: 'checkstyle'
+    apply plugin: 'io.spring.dependency-management'
+
+    group = rootProject.group
+    version = rootProject.version
+
+    java {
+        toolchain {
+            languageVersion = JavaLanguageVersion.of(21)
+        }
+        withSourcesJar()
+    }
+
+    dependencyManagement {
+        imports {
+            mavenBom "org.springframework.boot:spring-boot-dependencies:${rootProject.ext.springBootVersion}"
+            mavenBom "org.springframework.modulith:spring-modulith-bom:${rootProject.ext.springModulithVersion}"
+        }
+    }
+
+    dependencies {
+        testImplementation 'org.junit.jupiter:junit-jupiter'
+        testImplementation 'org.assertj:assertj-core'
+        testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+        if (project.path.startsWith(':modules:') || project.path.startsWith(':platform:')) {
+            api 'org.springframework.modulith:spring-modulith-api'
+        }
+    }
+
+    checkstyle {
+        toolVersion = '12.1.0'
+        configFile = rootProject.file('config/checkstyle/checkstyle.xml')
+        maxWarnings = 0
+    }
+
+    tasks.withType(JavaCompile).configureEach {
+        options.encoding = 'UTF-8'
+        options.release = 21
+        options.compilerArgs += ['-parameters']
+    }
+
+    tasks.withType(Test).configureEach {
+        useJUnitPlatform()
+    }
+}
+
+gradle.projectsEvaluated {
+    def bootProjects = allprojects.findAll {
+        it.plugins.hasPlugin('org.springframework.boot')
+    }
+    if (bootProjects*.path != [':apps:api-server']) {
+        throw new GradleException(
+                "Expected only :apps:api-server to apply Spring Boot, but found ${bootProjects*.path}")
+    }
+}

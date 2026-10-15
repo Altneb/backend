@@ -1,0 +1,35 @@
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        mavenCentral()
+    }
+}
+
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        mavenCentral()
+    }
+}
+
+rootProject.name = 'altneb-backend'
+
+include 'apps:api-server'
+
+include 'modules:identity'
+include 'modules:account'
+include 'modules:order'
+include 'modules:execution'
+include 'modules:portfolio'
+include 'modules:ledger'
+include 'modules:market'
+include 'modules:outbox'
+
+include 'platform:error'
+include 'platform:web'
+include 'platform:security'
+include 'platform:persistence'
+include 'platform:messaging'
+include 'platform:observability'
+
+include 'testing:test-support'
