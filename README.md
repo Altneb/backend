@@ -23,6 +23,17 @@ SPRING_PROFILES_ACTIVE=local ./gradlew :apps:api-server:bootRun
 설정은 환경변수로 주입합니다. 안전한 로컬 예시는 `.env.example`을 참고하되 실제 Secret은
 저장소에 Commit하지 않습니다.
 
+## 개발 환경 Endpoint
+
+- OpenAPI JSON: `GET /v3/api-docs`
+- Swagger UI: `/swagger-ui.html`
+- Health: `GET /actuator/health`
+- Prometheus Metric: `GET /actuator/prometheus`
+
+운영 Profile에서는 OpenAPI와 Swagger UI가 비활성화됩니다. Actuator는 기본적으로
+`127.0.0.1:8081`의 별도 관리 포트에만 바인딩되며 Health와 Prometheus Endpoint만 노출합니다.
+API 오류 응답에는 안정적인 오류 코드와 `traceId`만 포함하고 내부 예외 상세는 노출하지 않습니다.
+
 ## 모듈 구조
 
 - `apps/api-server`: 유일한 Spring Boot 실행 애플리케이션
