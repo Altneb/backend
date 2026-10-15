@@ -1,6 +1,8 @@
 package com.altneb.platform.error;
 
 public enum CommonErrorCode implements ErrorCode {
+    UNAUTHENTICATED("COMMON_008", "인증이 필요합니다.", ErrorType.AUTHENTICATION),
+    ACCESS_DENIED("COMMON_009", "접근 권한이 없습니다.", ErrorType.AUTHORIZATION),
     INVALID_INPUT("COMMON_001", "입력값이 올바르지 않습니다.", ErrorType.VALIDATION),
     MALFORMED_REQUEST("COMMON_002", "요청 본문을 읽을 수 없습니다.", ErrorType.VALIDATION),
     RESOURCE_NOT_FOUND("COMMON_003", "요청한 리소스를 찾을 수 없습니다.", ErrorType.NOT_FOUND),

@@ -1,0 +1,16 @@
+dependencies {
+    api project(':platform:error')
+    implementation project(':platform:security')
+    implementation project(':platform:web')
+    implementation project(':platform:observability')
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    implementation 'org.springframework:spring-webmvc'
+    implementation 'jakarta.servlet:jakarta.servlet-api'
+    implementation 'org.springdoc:springdoc-openapi-starter-common:3.1.0'
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'com.h2database:h2'
+}

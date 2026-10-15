@@ -28,6 +28,7 @@ class ModuleArchitectureTest {
         assertThat(modules.stream().map(module -> module.getIdentifier().toString()))
                 .containsExactlyInAnyOrder(
                         "identity",
+                        "api",
                         "account",
                         "order",
                         "execution",

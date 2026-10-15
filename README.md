@@ -34,6 +34,18 @@ SPRING_PROFILES_ACTIVE=local ./gradlew :apps:api-server:bootRun
 `127.0.0.1:8081`의 별도 관리 포트에만 바인딩되며 Health와 Prometheus Endpoint만 노출합니다.
 API 오류 응답에는 안정적인 오류 코드와 `traceId`만 포함하고 내부 예외 상세는 노출하지 않습니다.
 
+## 인증 설정
+
+사용자와 Refresh Session은 PostgreSQL에 저장하며 Flyway가 스키마를 관리합니다. Access Token은
+15분 기본 만료의 JWT이고, Refresh Token은 HttpOnly·SameSite=Strict Cookie로 전달됩니다. 저장소에는
+Refresh Token 원문 대신 SHA-256 해시만 저장하며 갱신할 때마다 회전합니다. 운영 환경에서는
+`REFRESH_COOKIE_SECURE=true`와 HTTPS를 사용해야 합니다. `JWT_SECRET_BASE64`는 최소 32바이트의 무작위
+값을 Base64로 인코딩해 실행 환경에서만 주입해야 하며 누락 시 애플리케이션은 시작하지 않습니다.
+
+현재 CSRF 정책은 `/api/v1`가 Authorization Bearer Token을 사용한다는 전제에서 해당 경로의 CSRF
+Token 검사를 제외합니다. Refresh Cookie는 인증 경로에만 한정하고 `SameSite=Strict`를 적용합니다.
+CORS 허용 Origin은 `CORS_ALLOWED_ORIGINS`로 명시하며 와일드카드를 사용하지 않습니다.
+
 ## 모듈 구조
 
 - `apps/api-server`: 유일한 Spring Boot 실행 애플리케이션

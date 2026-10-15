@@ -1,0 +1,10 @@
+dependencies {
+    api project(':platform:error')
+    implementation project(':platform:observability')
+    implementation project(':platform:web')
+    api 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework:spring-webmvc'
+    implementation 'jakarta.servlet:jakarta.servlet-api'
+    implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server'
+    implementation 'tools.jackson.core:jackson-databind'
+}
