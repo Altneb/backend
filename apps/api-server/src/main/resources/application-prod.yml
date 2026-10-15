@@ -12,6 +12,11 @@ springdoc:
   swagger-ui:
     enabled: false
 
+altneb:
+  security:
+    refresh-cookie:
+      secure: ${REFRESH_COOKIE_SECURE:true}
+
 management:
   server:
     address: ${MANAGEMENT_SERVER_ADDRESS:127.0.0.1}
